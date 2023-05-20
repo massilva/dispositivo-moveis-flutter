@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:minhas_financas/routes/routes_generator.dart';
 
 import 'pages/home.dart';
 
@@ -18,6 +19,10 @@ class MyApp extends StatelessWidget {
         // useMaterial3: false,
       ),
       home: myHome,
+      // Rota inicial
+      initialRoute: RoutesGenerator.homePage,
+      // Função geradora de rota
+      onGenerateRoute: RoutesGenerator.generate,
     );
   }
 }
