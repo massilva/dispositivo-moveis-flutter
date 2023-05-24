@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:minhas_financas/pages/add_click.dart';
-import 'package:minhas_financas/pages/home.dart';
-import 'package:minhas_financas/shared/constants.dart';
+
+import '../pages/add_click.dart';
+import '../pages/home.dart';
+import '../shared/constants.dart';
 
 class RoutesGenerator {
-  static const homePage = '/home';
+  static const homePage = '/';
   static const addPage = '/clique/add';
 
   RoutesGenerator._();

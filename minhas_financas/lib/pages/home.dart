@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:minhas_financas/routes/routes_generator.dart';
-import 'package:minhas_financas/shared/constants.dart';
+
+import '../routes/routes_generator.dart';
+import '../shared/constants.dart';
 
 class MyHomePage extends StatefulWidget {
   // const MyHomePage({Key? key, required String title}) : _title = title, super(key: key);

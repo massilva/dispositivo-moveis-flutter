@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:minhas_financas/routes/routes_generator.dart';
 
-import 'pages/home.dart';
+import 'routes/routes_generator.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var myHome = const MyHomePage(title: 'Flutter Demo Home Page');
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo', //título
@@ -18,7 +16,6 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
         // useMaterial3: false,
       ),
-      home: myHome,
       // Rota inicial
       initialRoute: RoutesGenerator.homePage,
       // Função geradora de rota
