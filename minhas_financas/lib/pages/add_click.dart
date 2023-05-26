@@ -10,7 +10,7 @@ class AddClickPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Colors.red,
+        color: Colors.blue,
         child: Center(
           child: Column(
             children: [
@@ -19,7 +19,9 @@ class AddClickPage extends StatelessWidget {
                 onPressed: () => Navigator.of(context).pop(),
                 child: const Icon(Icons.arrow_back),
               ),
-              const Text(AppConstants.newPage),
+              const Text(
+                AppConstants.newPage,
+              ),
             ],
           ),
         ),
