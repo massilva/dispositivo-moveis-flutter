@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:minhas_financas/components/subtitle_widget.dart';
+import 'package:minhas_financas/shared/styles.dart';
 
+import '../components/title_widget.dart';
 import '../routes/routes_generator.dart';
 import '../shared/constants.dart';
 
@@ -19,7 +22,43 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: AppStyle.primaryColor,
+              ),
+              child: SizedBox.shrink(),
+            ),
+            ListTile(
+              leading: const Icon(Icons.home),
+              title: const Text('Home'),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: const Icon(Icons.category),
+              title: const Text('Categorias'),
+              onTap: () {
+                Navigator.of(context).pushNamed(RoutesGenerator.categoryPage);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.calendar_month),
+              title: const Text('Calendário'),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: const Icon(Icons.toc_outlined),
+              title: const Text('Sobre'),
+              onTap: () {},
+            ),
+          ],
+        ),
+      ),
       appBar: AppBar(
+        elevation: 0,
         backgroundColor: Theme.of(context).colorScheme.primary,
         title: Align(
           alignment: Alignment.center,
@@ -42,32 +81,12 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(AppConstants.welcome),
-              Text(
-                widget.name,
-                style: const TextStyle(
-                  color: Color(0xFF0055b3),
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              const SubtitleDefault(title: AppConstants.welcome),
+              TitleDefault(title: widget.name),
             ],
           ),
         ),
       ),
-      // body: const Column(
-      //   mainAxisAlignment: MainAxisAlignment.center,
-      //   crossAxisAlignment: CrossAxisAlignment.center,
-      //   children: <Widget>[
-      //   ],
-      // ),
-
-      // const Center(
-      //   child: Icon(
-      //     Icons.money_off,
-      //     size: 64,
-      //     color: Colors.blueGrey,
-      //   ),
-      // ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           //chamar a página de cadastro
