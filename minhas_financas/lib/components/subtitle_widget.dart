@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:minhas_financas/components/text_default.dart';
-import 'package:minhas_financas/shared/styles.dart';
+
+import 'text_default.dart';
+import '../shared/styles.dart';
 
 class SubtitleDefault extends StatelessWidget {
   final String _title;

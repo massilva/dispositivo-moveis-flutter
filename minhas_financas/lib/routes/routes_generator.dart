@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:minhas_financas/pages/about.dart';
-import 'package:minhas_financas/pages/calendar.dart';
-import 'package:minhas_financas/pages/category.dart';
 
+import '../pages/about.dart';
+import '../pages/calendar.dart';
+import '../pages/category.dart';
 import '../pages/add_click.dart';
 import '../pages/home.dart';
 import '../shared/constants.dart';
