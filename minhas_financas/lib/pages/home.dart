@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+
 import '../components/subtitle_widget.dart';
 import '../shared/styles.dart';
-
 import '../components/title_widget.dart';
 import '../routes/routes_generator.dart';
 import '../shared/constants.dart';
@@ -67,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Align(
           alignment: Alignment.center,
           child: Image.asset(
-            'lib/assets/images/logo.png',
+            'assets/images/logo.png',
             width: 40,
           ),
         ),
