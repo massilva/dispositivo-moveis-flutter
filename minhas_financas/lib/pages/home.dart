@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:minhas_financas/components/subtitle_widget.dart';
-import 'package:minhas_financas/shared/styles.dart';
+import '../components/subtitle_widget.dart';
+import '../shared/styles.dart';
 
 import '../components/title_widget.dart';
 import '../routes/routes_generator.dart';
@@ -34,25 +34,29 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             ListTile(
               leading: const Icon(Icons.home),
-              title: const Text('Home'),
+              title: const Text(AppConstants.home),
               onTap: () {},
             ),
             ListTile(
               leading: const Icon(Icons.category),
-              title: const Text('Categorias'),
+              title: const Text(AppConstants.category),
               onTap: () {
                 Navigator.of(context).pushNamed(RoutesGenerator.categoryPage);
               },
             ),
             ListTile(
               leading: const Icon(Icons.calendar_month),
-              title: const Text('Calendário'),
-              onTap: () {},
+              title: const Text(AppConstants.calendar),
+              onTap: () {
+                Navigator.of(context).pushNamed(RoutesGenerator.calendarPage);
+              },
             ),
             ListTile(
               leading: const Icon(Icons.toc_outlined),
-              title: const Text('Sobre'),
-              onTap: () {},
+              title: const Text(AppConstants.about),
+              onTap: () {
+                Navigator.of(context).pushNamed(RoutesGenerator.aboutPage);
+              },
             ),
           ],
         ),
