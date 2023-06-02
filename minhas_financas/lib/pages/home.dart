@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 import '../components/subtitle_widget.dart';
-import '../shared/styles.dart';
+import '../components/tasks/list.dart';
 import '../components/title_widget.dart';
 import '../routes/routes_generator.dart';
 import '../shared/constants.dart';
+import '../shared/styles.dart';
 
 class MyHomePage extends StatefulWidget {
   // const MyHomePage({Key? key, required String userName}) : _userName = userName, super(key: key);
@@ -35,7 +36,9 @@ class _MyHomePageState extends State<MyHomePage> {
             ListTile(
               leading: const Icon(Icons.home),
               title: const Text(AppConstants.home),
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).pushNamed(RoutesGenerator.homePage);
+              },
             ),
             ListTile(
               leading: const Icon(Icons.category),
@@ -87,6 +90,12 @@ class _MyHomePageState extends State<MyHomePage> {
             children: [
               const SubtitleDefault(title: AppConstants.welcome),
               TitleDefault(title: widget.name),
+              const Expanded(
+                child: Padding(
+                  padding: EdgeInsets.only(top: 16.0),
+                  child: ListTasks(),
+                ),
+              ),
             ],
           ),
         ),
