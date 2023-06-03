@@ -7,4 +7,5 @@ abstract class AppConstants {
   static const calendar = 'Calendário';
   static const category = 'Categoria';
   static const home = 'Home';
+  static const nextTasks = 'Próximas atividades';
 }
