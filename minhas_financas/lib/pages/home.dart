@@ -30,6 +30,13 @@ class _MyHomePageState extends State<MyHomePage> {
             const DrawerHeader(
               decoration: BoxDecoration(
                 color: AppStyle.primaryColor,
+                image: DecorationImage(
+                  //image: AssetImage
+                  image: NetworkImage(
+                    'https://picsum.photos/seed/picsum/200/300',
+                  ),
+                  fit: BoxFit.cover,
+                ),
               ),
               child: SizedBox.shrink(),
             ),
