@@ -1,58 +1,120 @@
 import 'package:flutter/material.dart';
+import '../controllers/category_controller.dart';
+import '../models/category_model.dart';
+import '../services/category_service.dart';
 
+import '../components/title_widget.dart';
 import '../routes/routes_generator.dart';
 import '../shared/constants.dart';
 import '../shared/styles.dart';
+import '../components/image_header_default.dart';
 
-class CategoryPage extends StatelessWidget {
+class CategoryPage extends StatefulWidget {
   const CategoryPage({super.key});
+
+  @override
+  State<CategoryPage> createState() => _CategoryPageState();
+}
+
+class _CategoryPageState extends State<CategoryPage> {
+  final CategoryController _categoryController = CategoryController(
+    categoryService: CategoryService(),
+  );
+  List _categories = <Category>[];
+
+  @override
+  void initState() {
+    _categories = _categoryController.getCategories();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      endDrawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: AppStyle.primaryColor,
-              ),
-              child: SizedBox.shrink(),
-            ),
-            ListTile(
-              leading: const Icon(Icons.home),
-              title: const Text(AppConstants.home),
-              onTap: () {
-                Navigator.of(context).pushNamed(RoutesGenerator.homePage);
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.category),
-              title: const Text(AppConstants.category),
-              onTap: () {
-                Navigator.of(context).pushNamed(RoutesGenerator.categoryPage);
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.calendar_month),
-              title: const Text(AppConstants.calendar),
-              onTap: () {
-                Navigator.of(context).pushNamed(RoutesGenerator.calendarPage);
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.toc_outlined),
-              title: const Text(AppConstants.about),
-              onTap: () {
-                Navigator.of(context).pushNamed(RoutesGenerator.aboutPage);
-              },
-            ),
-          ],
-        ),
-      ),
       appBar: AppBar(
-        title: const Text('Categoria'),
+        elevation: 0,
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        title: const ImageHeaderDefault(),
+      ),
+      body: Column(
+        children: [
+          const TitleDefault(title: 'Categorias'),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Expanded(
+                child: Column(
+                  children: [
+                    const Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            'Nome',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(right: 16.0, left: 16.0),
+                          child: Text(
+                            'Cor',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Text(
+                          'Ação',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Container(
+                      color: AppStyle.gray,
+                      height: 1,
+                      margin: const EdgeInsets.symmetric(vertical: 8.0),
+                    ),
+                    Expanded(
+                      child: ListView.builder(
+                        itemCount: _categories.length,
+                        itemBuilder: (_, index) {
+                          return Row(
+                            children: [
+                              Expanded(
+                                child: Text(_categories[index].name),
+                              ),
+                              Container(
+                                color: Color(_categories[index].color),
+                                height: 16,
+                                width: 16,
+                              ),
+                              const Row(
+                                children: [
+                                  Icon(Icons.edit),
+                                  Icon(Icons.delete),
+                                ],
+                              )
+                            ],
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).pushNamed(RoutesGenerator.addPage);
+        },
+        tooltip: AppConstants.newPage,
+        child: const Icon(Icons.add),
       ),
     );
   }

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:minhas_financas/components/subtitle_widget.dart';
-import 'package:minhas_financas/components/title_widget.dart';
-import 'package:minhas_financas/models/task_model.dart';
-import 'package:minhas_financas/shared/styles.dart';
+import '../subtitle_widget.dart';
+import '../title_widget.dart';
+import '../../models/task_model.dart';
+import '../../services/category_service.dart';
+import '../../shared/styles.dart';
 
 import '../../controllers/home_controller.dart';
 import '../../services/task_service.dart';
@@ -18,7 +19,9 @@ class ListTasks extends StatefulWidget {
 class _ListTasksState extends State<ListTasks> {
   // Instância de controller
   final controller = HomeController(
-    taskService: TaskService(),
+    taskService: TaskService(
+      categoryService: CategoryService(),
+    ),
   );
   List<Task> tasks;
 

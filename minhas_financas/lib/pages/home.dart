@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../components/image_header_default.dart';
 import '../components/subtitle_widget.dart';
 import '../components/tasks/list.dart';
 import '../components/title_widget.dart';
@@ -74,13 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Theme.of(context).colorScheme.primary,
-        title: Align(
-          alignment: Alignment.center,
-          child: Image.asset(
-            'assets/images/logo.png',
-            width: 40,
-          ),
-        ),
+        title: const ImageHeaderDefault(),
         //title: Image.network(
         //  'https://cdn1.iconfinder.com/data/icons/sharovar-outline/128/Pie_chart-512.png',
         //),
