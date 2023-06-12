@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import '../subtitle_widget.dart';
-import '../title_widget.dart';
-import '../../models/task_model.dart';
-import '../../services/category_service.dart';
-import '../../shared/styles.dart';
+import '../../../components/subtitle_widget.dart';
+import '../../../components/title_widget.dart';
+import '../models/task_model.dart';
+import '../../category/services/category_service.dart';
+import '../../../shared/styles.dart';
 
-import '../../controllers/home_controller.dart';
-import '../../services/task_service.dart';
-import '../../shared/constants.dart';
+import '../../home/controllers/home_controller.dart';
+import '../services/task_service.dart';
+import '../../../shared/constants.dart';
 
 class ListTasks extends StatefulWidget {
   const ListTasks({super.key});

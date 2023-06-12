@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../components/image_header_default.dart';
-import '../components/subtitle_widget.dart';
-import '../components/tasks/list.dart';
-import '../components/title_widget.dart';
-import '../routes/routes_generator.dart';
-import '../shared/constants.dart';
-import '../shared/styles.dart';
+import '../../../components/image_header_default.dart';
+import '../../../components/subtitle_widget.dart';
+import '../../task/components/list.dart';
+import '../../../components/title_widget.dart';
+import '../../../routes/routes_generator.dart';
+import '../../../shared/constants.dart';
+import '../../../shared/styles.dart';
 
 class MyHomePage extends StatefulWidget {
   // const MyHomePage({Key? key, required String userName}) : _userName = userName, super(key: key);

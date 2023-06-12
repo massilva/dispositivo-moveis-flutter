@@ -1,4 +1,4 @@
-import 'category_model.dart';
+import '../../category/models/category_model.dart';
 
 class Task {
   final String title;

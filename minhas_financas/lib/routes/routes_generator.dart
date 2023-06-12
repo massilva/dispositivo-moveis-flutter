@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../pages/about.dart';
-import '../pages/calendar.dart';
-import '../pages/category.dart';
-import '../pages/add_click.dart';
-import '../pages/home.dart';
+import '../modules/home/pages/about.dart';
+import '../modules/home/pages/calendar.dart';
+import '../modules/category/pages/category.dart';
+import '../modules/home/pages/add_click.dart';
+import '../modules/home/pages/home.dart';
 import '../shared/constants.dart';
 
 class RoutesGenerator {

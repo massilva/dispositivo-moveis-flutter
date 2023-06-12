@@ -1,5 +1,5 @@
 import '../models/task_model.dart';
-import 'category_service.dart';
+import '../../category/services/category_service.dart';
 
 class TaskService {
   final CategoryService _categoryService;

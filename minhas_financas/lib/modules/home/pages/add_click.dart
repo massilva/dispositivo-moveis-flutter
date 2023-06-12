@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../shared/constants.dart';
+import '../../../shared/constants.dart';
 
 class AddClickPage extends StatelessWidget {
   // const AddClickPage({Key? key });
