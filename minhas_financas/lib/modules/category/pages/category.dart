@@ -111,7 +111,7 @@ class _CategoryPageState extends State<CategoryPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).pushNamed(RoutesGenerator.addPage);
+          Navigator.of(context).pushNamed(RoutesGenerator.addCategoryPage);
         },
         tooltip: AppConstants.newPage,
         child: const Icon(Icons.add),

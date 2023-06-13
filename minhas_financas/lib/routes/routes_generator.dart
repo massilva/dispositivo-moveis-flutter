@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../modules/category/pages/add_category.dart';
 import '../modules/home/pages/about.dart';
 import '../modules/home/pages/calendar.dart';
 import '../modules/category/pages/category.dart';
@@ -13,6 +14,7 @@ class RoutesGenerator {
   static const aboutPage = '/about';
   static const categoryPage = '/category';
   static const calendarPage = '/calendar';
+  static const addCategoryPage = '$categoryPage/add';
 
   RoutesGenerator._();
 
@@ -28,6 +30,8 @@ class RoutesGenerator {
         return _goPage(const CategoryPage());
       case calendarPage:
         return _goPage(const CalendarPage());
+      case addCategoryPage:
+        return _goPage(CategoryAddPage());
       default:
         throw const FormatException(AppConstants.pageNotFound);
     }
