@@ -1,13 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:minhas_financas/components/input_default.dart';
-import 'package:minhas_financas/shared/styles.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:minhas_financas/modules/category/services/category_service.dart';
+import 'package:minhas_financas/shared/validators.dart';
 
+import '../../../components/input_default.dart';
+import '../../../shared/styles.dart';
 import '../../../components/image_header_default.dart';
+import '../controllers/category_controller.dart';
 
 class CategoryAddPage extends StatelessWidget {
-  final TextEditingController? _nameController;
+  final TextEditingController? _nameEditingController;
+  final TextEditingController? _colorEditingController;
+  final TextEditingController? _descriptionEditingController;
+  final _key = GlobalKey<FormState>();
+  final CategoryController categoryController = CategoryController(
+    categoryService: CategoryService(),
+  );
 
-  CategoryAddPage({super.key}) : _nameController = TextEditingController();
+  CategoryAddPage({super.key})
+      : _nameEditingController = TextEditingController(),
+        _colorEditingController =
+            TextEditingController(text: AppStyle.primaryColor.value.toString()),
+        _descriptionEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +32,7 @@ class CategoryAddPage extends StatelessWidget {
         title: const ImageHeaderDefault(),
       ),
       body: Form(
+        key: _key,
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
@@ -27,13 +42,51 @@ class CategoryAddPage extends StatelessWidget {
               children: [
                 InputDefault(
                   labelText: 'Nome',
-                  controller: _nameController,
+                  controller: _nameEditingController,
+                  validator: Validator.requiredField,
                 ),
                 const Divider(),
-                const InputDefault(labelText: 'Cor'),
+                InputDefault(
+                  labelText: 'Cor',
+                  controller: _colorEditingController,
+                  validator: Validator.requiredField,
+                  keyboardType: TextInputType.number,
+                  onTap: () {
+                    showDialog<void>(
+                      context: context,
+                      builder: (_) {
+                        return AlertDialog(
+                          title: const Text('Selecione uma cor!'),
+                          content: SingleChildScrollView(
+                            child: ColorPicker(
+                              pickerColor: Color(
+                                  int.parse(_colorEditingController!.text)),
+                              onColorChanged: (color) {
+                                _colorEditingController!.text =
+                                    color.value.toString();
+                              },
+                            ),
+                          ),
+                          actions: <Widget>[
+                            ElevatedButton(
+                              child: const Text('Feito'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
+                ),
                 const Divider(),
-                const InputDefault(
+                InputDefault(
                   labelText: 'Descrição',
+                  controller: _descriptionEditingController,
+                  maxLines: 3,
+                  maxLength: 100,
+                  validator: Validator.requiredField,
                 ),
               ],
             ),
@@ -48,15 +101,23 @@ class CategoryAddPage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
           child: ElevatedButton(
             style: const ButtonStyle(
+              // backgroundColor: MaterialStateProperty.all(
               backgroundColor: MaterialStatePropertyAll(
                 AppStyle.primaryColor,
               ),
+              // foregroundColor: MaterialStateProperty.all(
               foregroundColor: MaterialStatePropertyAll(
                 AppStyle.white,
               ),
             ),
             onPressed: () {
-              print('Clicado: ${_nameController!.text}');
+              if (_key.currentState!.validate()) {
+                categoryController.saveCategory(
+                  _nameEditingController!.text,
+                  int.parse(_colorEditingController!.text),
+                  _descriptionEditingController!.text,
+                );
+              }
             },
             child: const Text('Salvar'),
           ),

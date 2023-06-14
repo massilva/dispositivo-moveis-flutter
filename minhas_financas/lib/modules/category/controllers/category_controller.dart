@@ -9,4 +9,14 @@ class CategoryController {
       : _categoryService = categoryService;
 
   List<Category> getCategories() => _categoryService.getCategories();
+
+  String? saveCategory(String name, int color, String description) {
+    return _categoryService.save(
+      Category(
+        name: name,
+        color: color,
+        description: description,
+      ),
+    );
+  }
 }
