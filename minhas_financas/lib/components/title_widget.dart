@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'text_default.dart';
 import '../shared/styles.dart';
+import 'text_default.dart';
 
 class TitleDefault extends StatelessWidget {
   final String _title;

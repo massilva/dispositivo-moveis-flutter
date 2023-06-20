@@ -1,5 +1,4 @@
-import 'package:minhas_financas/modules/category/models/category_model.dart';
-
+import '../../category/models/category_model.dart';
 import '../models/task_model.dart';
 import '../../category/services/category_service.dart';
 
