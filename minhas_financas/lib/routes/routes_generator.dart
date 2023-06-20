@@ -21,9 +21,8 @@ class RoutesGenerator {
   RoutesGenerator._();
 
   static Route generate(RouteSettings settings) {
-    final categoryService = CategoryService();
     final categoryController = CategoryController(
-      categoryService: categoryService,
+      categoryService: CategoryService(),
     );
 
     switch (settings.name) {

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
-import '../../../routes/routes_generator.dart';
+import '../../../components/color_picker_default.dart';
 import '../controllers/category_controller.dart';
 import '../../../shared/validators.dart';
 import '../../../components/input_default.dart';
@@ -15,8 +14,10 @@ class CategoryAddPage extends StatelessWidget {
   final _key = GlobalKey<FormState>();
   final CategoryController _categoryController;
 
-  CategoryAddPage({required CategoryController categoryController, super.key})
-      : _nameEditingController = TextEditingController(),
+  CategoryAddPage({
+    required CategoryController categoryController,
+    super.key,
+  })  : _nameEditingController = TextEditingController(),
         _colorEditingController =
             TextEditingController(text: AppStyle.primaryColor.value.toString()),
         _descriptionEditingController = TextEditingController(),
@@ -29,13 +30,6 @@ class CategoryAddPage extends StatelessWidget {
         elevation: 0,
         backgroundColor: Theme.of(context).colorScheme.primary,
         title: const ImageHeaderDefault(),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.of(context)
-                .pushReplacementNamed(RoutesGenerator.categoryPage);
-          },
-        ),
       ),
       body: Form(
         key: _key,
@@ -52,40 +46,9 @@ class CategoryAddPage extends StatelessWidget {
                   validator: Validator.requiredField,
                 ),
                 const Divider(),
-                InputDefault(
-                  labelText: 'Cor',
+                ColorPickerInputDefault(
                   controller: _colorEditingController,
-                  validator: Validator.requiredField,
-                  keyboardType: TextInputType.number,
-                  onTap: () {
-                    showDialog<void>(
-                      context: context,
-                      builder: (_) {
-                        return AlertDialog(
-                          title: const Text('Selecione uma cor!'),
-                          content: SingleChildScrollView(
-                            child: ColorPicker(
-                              pickerColor: Color(
-                                int.parse(_colorEditingController!.text),
-                              ),
-                              onColorChanged: (color) {
-                                _colorEditingController!.text =
-                                    color.value.toString();
-                              },
-                            ),
-                          ),
-                          actions: <Widget>[
-                            ElevatedButton(
-                              child: const Text('Feito'),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                            ),
-                          ],
-                        );
-                      },
-                    );
-                  },
+                  color: int.parse(_colorEditingController!.text),
                 ),
                 const Divider(),
                 InputDefault(
@@ -117,9 +80,7 @@ class CategoryAddPage extends StatelessWidget {
               ),
             ),
             onPressed: () {
-              print('Salvando...');
               if (_key.currentState!.validate()) {
-                print('Válido');
                 _categoryController.saveCategory(
                   _nameEditingController!.text,
                   int.parse(_colorEditingController!.text),

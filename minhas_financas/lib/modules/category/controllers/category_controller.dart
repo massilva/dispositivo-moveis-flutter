@@ -1,5 +1,6 @@
-import '../models/category_model.dart';
+import 'package:flutter/material.dart';
 
+import '../models/category_model.dart';
 import '../services/category_service.dart';
 
 class CategoryController {
@@ -7,6 +8,9 @@ class CategoryController {
 
   CategoryController({required CategoryService categoryService})
       : _categoryService = categoryService;
+
+  ValueNotifier<List<Category>> get categoriesNotifier =>
+      _categoryService.categoriesNotifier;
 
   List<Category> getCategories() => _categoryService.getCategories();
 
