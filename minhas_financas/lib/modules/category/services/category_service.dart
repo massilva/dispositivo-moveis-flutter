@@ -5,9 +5,9 @@ class CategoryService {
 
   CategoryService()
       : _database = [
-          Category(name: 'Imposto', color: 0xFFF45757),
-          Category(name: 'Entrada', color: 0xFF5cc6ba),
-          Category(name: 'Pagamento', color: 0xFF6680EC),
+          // Category(name: 'Imposto', color: 0xFFF45757),
+          // Category(name: 'Entrada', color: 0xFF5cc6ba),
+          // Category(name: 'Pagamento', color: 0xFF6680EC),
         ];
 
   List<Category> getCategories() {

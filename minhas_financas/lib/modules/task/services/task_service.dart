@@ -1,3 +1,5 @@
+import 'package:minhas_financas/modules/category/models/category_model.dart';
+
 import '../models/task_model.dart';
 import '../../category/services/category_service.dart';
 
@@ -18,7 +20,9 @@ class TaskService {
         return Task(
           title: 'Texto $index',
           description: 'Falta ${index * 2} dias',
-          category: categories[index % categories.length],
+          category: categories.isNotEmpty
+              ? categories[index % categories.length]
+              : Category.empty,
           finished: index.isEven,
         );
       },

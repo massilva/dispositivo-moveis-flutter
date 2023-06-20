@@ -1,27 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
-import 'package:minhas_financas/modules/category/services/category_service.dart';
-import 'package:minhas_financas/shared/validators.dart';
 
+import '../../../routes/routes_generator.dart';
+import '../controllers/category_controller.dart';
+import '../../../shared/validators.dart';
 import '../../../components/input_default.dart';
 import '../../../shared/styles.dart';
 import '../../../components/image_header_default.dart';
-import '../controllers/category_controller.dart';
 
 class CategoryAddPage extends StatelessWidget {
   final TextEditingController? _nameEditingController;
   final TextEditingController? _colorEditingController;
   final TextEditingController? _descriptionEditingController;
   final _key = GlobalKey<FormState>();
-  final CategoryController categoryController = CategoryController(
-    categoryService: CategoryService(),
-  );
+  final CategoryController _categoryController;
 
-  CategoryAddPage({super.key})
+  CategoryAddPage({required CategoryController categoryController, super.key})
       : _nameEditingController = TextEditingController(),
         _colorEditingController =
             TextEditingController(text: AppStyle.primaryColor.value.toString()),
-        _descriptionEditingController = TextEditingController();
+        _descriptionEditingController = TextEditingController(),
+        _categoryController = categoryController;
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +29,13 @@ class CategoryAddPage extends StatelessWidget {
         elevation: 0,
         backgroundColor: Theme.of(context).colorScheme.primary,
         title: const ImageHeaderDefault(),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context)
+                .pushReplacementNamed(RoutesGenerator.categoryPage);
+          },
+        ),
       ),
       body: Form(
         key: _key,
@@ -60,7 +66,8 @@ class CategoryAddPage extends StatelessWidget {
                           content: SingleChildScrollView(
                             child: ColorPicker(
                               pickerColor: Color(
-                                  int.parse(_colorEditingController!.text)),
+                                int.parse(_colorEditingController!.text),
+                              ),
                               onColorChanged: (color) {
                                 _colorEditingController!.text =
                                     color.value.toString();
@@ -86,7 +93,6 @@ class CategoryAddPage extends StatelessWidget {
                   controller: _descriptionEditingController,
                   maxLines: 3,
                   maxLength: 100,
-                  validator: Validator.requiredField,
                 ),
               ],
             ),
@@ -111,11 +117,13 @@ class CategoryAddPage extends StatelessWidget {
               ),
             ),
             onPressed: () {
+              print('Salvando...');
               if (_key.currentState!.validate()) {
-                categoryController.saveCategory(
+                print('Válido');
+                _categoryController.saveCategory(
                   _nameEditingController!.text,
                   int.parse(_colorEditingController!.text),
-                  _descriptionEditingController!.text,
+                  _descriptionEditingController?.text,
                 );
               }
             },

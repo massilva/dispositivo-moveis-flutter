@@ -10,21 +10,20 @@ import '../../../shared/styles.dart';
 import '../../../components/image_header_default.dart';
 
 class CategoryPage extends StatefulWidget {
-  const CategoryPage({super.key});
+  final CategoryController _controller;
+  const CategoryPage({required CategoryController controller, super.key})
+      : _controller = controller;
 
   @override
   State<CategoryPage> createState() => _CategoryPageState();
 }
 
 class _CategoryPageState extends State<CategoryPage> {
-  final CategoryController _categoryController = CategoryController(
-    categoryService: CategoryService(),
-  );
   List _categories = <Category>[];
 
   @override
   void initState() {
-    _categories = _categoryController.getCategories();
+    _categories = widget._controller.getCategories();
     super.initState();
   }
 
@@ -111,7 +110,12 @@ class _CategoryPageState extends State<CategoryPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).pushNamed(RoutesGenerator.addCategoryPage);
+          Navigator.of(context).pushNamedAndRemoveUntil(
+            RoutesGenerator.addCategoryPage,
+            (Route route) {
+              return route.isCurrent;
+            },
+          );
         },
         tooltip: AppConstants.newPage,
         child: const Icon(Icons.add),

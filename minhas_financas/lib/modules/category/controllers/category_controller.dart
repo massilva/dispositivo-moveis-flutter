@@ -10,7 +10,7 @@ class CategoryController {
 
   List<Category> getCategories() => _categoryService.getCategories();
 
-  String? saveCategory(String name, int color, String description) {
+  String? saveCategory(String name, int color, String? description) {
     return _categoryService.save(
       Category(
         name: name,
