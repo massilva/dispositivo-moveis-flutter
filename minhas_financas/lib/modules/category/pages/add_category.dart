@@ -117,14 +117,14 @@ class CategoryAddPage extends StatelessWidget {
               ),
             ),
             onPressed: () {
-              print('Salvando...');
               if (_key.currentState!.validate()) {
-                print('Válido');
                 _categoryController.saveCategory(
                   _nameEditingController!.text,
                   int.parse(_colorEditingController!.text),
                   _descriptionEditingController?.text,
                 );
+                Navigator.of(context)
+                    .pushReplacementNamed(RoutesGenerator.categoryPage);
               }
             },
             child: const Text('Salvar'),

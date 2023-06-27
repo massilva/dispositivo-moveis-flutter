@@ -19,4 +19,8 @@ class CategoryController {
       ),
     );
   }
+
+  void remove(int index) {
+    _categoryService.remove(index);
+  }
 }

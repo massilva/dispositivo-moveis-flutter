@@ -1,15 +1,15 @@
 import '../models/category_model.dart';
 
 class CategoryService {
-  final List<Category> _database;
+  static final CategoryService _instance = CategoryService._internal();
 
-  CategoryService()
-      : _database = [
-          // Category(name: 'Imposto', color: 0xFFF45757),
-          // Category(name: 'Entrada', color: 0xFF5cc6ba),
-          // Category(name: 'Pagamento', color: 0xFF6680EC),
-        ];
+  factory CategoryService() {
+    return _instance;
+  }
 
+  CategoryService._internal();
+
+  final _database = <Category>[];
   List<Category> getCategories() {
     return _database;
   }
@@ -21,5 +21,9 @@ class CategoryService {
     } catch (error) {
       return error.toString();
     }
+  }
+
+  void remove(int index) {
+    _database.removeAt(index);
   }
 }
