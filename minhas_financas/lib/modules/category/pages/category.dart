@@ -90,7 +90,15 @@ class _CategoryPageState extends State<CategoryPage> {
                             ),
                             Row(
                               children: [
-                                const Icon(Icons.edit),
+                                IconButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pushNamed(
+                                      RoutesGenerator.editCategoryPage,
+                                      arguments: _categories[index],
+                                    );
+                                  },
+                                  icon: const Icon(Icons.edit),
+                                ),
                                 IconButton(
                                   onPressed: () {
                                     showDialog(

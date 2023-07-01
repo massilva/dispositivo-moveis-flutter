@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:minhas_financas/modules/category/pages/edit_category.dart';
 
 import '../modules/category/controllers/category_controller.dart';
+import '../modules/category/models/category_model.dart';
 import '../modules/category/pages/add_category.dart';
 import '../modules/category/services/category_service.dart';
 import '../modules/home/pages/about.dart';
@@ -17,6 +19,7 @@ class RoutesGenerator {
   static const categoryPage = '/category';
   static const calendarPage = '/calendar';
   static const addCategoryPage = '$categoryPage/add';
+  static const editCategoryPage = '$categoryPage/edit';
 
   RoutesGenerator._();
 
@@ -39,6 +42,15 @@ class RoutesGenerator {
         return _goPage(const CalendarPage());
       case addCategoryPage:
         return _goPage(CategoryAddPage(categoryController: categoryController));
+      case editCategoryPage:
+        // cast do argumento para o tipo Category
+        final Category category = settings.arguments as Category;
+        return _goPage(
+          CategoryEditPage(
+            categoryController: categoryController,
+            category: category,
+          ),
+        );
       default:
         throw const FormatException(AppConstants.pageNotFound);
     }
