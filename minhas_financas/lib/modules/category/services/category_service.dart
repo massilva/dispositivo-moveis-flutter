@@ -26,4 +26,8 @@ class CategoryService {
   void remove(int index) {
     _database.removeAt(index);
   }
+
+  void updateCategory(int index, Category updatedCategory) {
+    _database[index] = updatedCategory;
+  }
 }

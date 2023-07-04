@@ -33,6 +33,13 @@ class _CategoryPageState extends State<CategoryPage> {
         elevation: 0,
         backgroundColor: Theme.of(context).colorScheme.primary,
         title: const ImageHeaderDefault(),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context)
+                .pushReplacementNamed(RoutesGenerator.homePage);
+          },
+        ),
       ),
       body: Column(
         children: [
@@ -94,7 +101,7 @@ class _CategoryPageState extends State<CategoryPage> {
                                   onPressed: () {
                                     Navigator.of(context).pushNamed(
                                       RoutesGenerator.editCategoryPage,
-                                      arguments: _categories[index],
+                                      arguments: [index, _categories[index]],
                                     );
                                   },
                                   icon: const Icon(Icons.edit),

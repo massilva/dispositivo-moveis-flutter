@@ -76,10 +76,10 @@ class _AddEditCategoryState extends State<AddEditCategory> {
                           content: SingleChildScrollView(
                             child: ColorPicker(
                               pickerColor: Color(
-                                int.parse(widget._colorEditingController!.text),
+                                int.parse(widget._colorEditingController.text),
                               ),
                               onColorChanged: (color) {
-                                widget._colorEditingController!.text =
+                                widget._colorEditingController.text =
                                     color.value.toString();
                               },
                             ),

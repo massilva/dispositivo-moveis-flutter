@@ -44,11 +44,20 @@ class RoutesGenerator {
         return _goPage(CategoryAddPage(categoryController: categoryController));
       case editCategoryPage:
         // cast do argumento para o tipo Category
-        final Category category = settings.arguments as Category;
+        List listArgs = settings.arguments as List;
+
+        if (listArgs.isEmpty) {
+          listArgs = [-1, Category.empty];
+        }
+
+        final int index = listArgs[0] as int;
+        final Category category = listArgs[1] as Category;
+
         return _goPage(
           CategoryEditPage(
             categoryController: categoryController,
             category: category,
+            index: index,
           ),
         );
       default:

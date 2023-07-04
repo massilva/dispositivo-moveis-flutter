@@ -23,4 +23,8 @@ class CategoryController {
   void remove(int index) {
     _categoryService.remove(index);
   }
+
+  void updateCategory(int index, Category updatedCategory) {
+    _categoryService.updateCategory(index, updatedCategory);
+  }
 }
