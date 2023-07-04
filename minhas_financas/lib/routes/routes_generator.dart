@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:minhas_financas/modules/category/pages/edit_category.dart';
 
 import '../modules/category/controllers/category_controller.dart';
+import '../modules/category/datasources/shared_preferences_datasource.dart';
 import '../modules/category/models/category_model.dart';
 import '../modules/category/pages/add_category.dart';
 import '../modules/category/services/category_service.dart';
@@ -24,7 +25,9 @@ class RoutesGenerator {
   RoutesGenerator._();
 
   static Route generate(RouteSettings settings) {
-    final categoryService = CategoryService();
+    final categoryDatasource = CategorySharedPreferencesDatasource();
+    final categoryService =
+        CategoryService(categoryDatasource: categoryDatasource);
     final categoryController = CategoryController(
       categoryService: categoryService,
     );

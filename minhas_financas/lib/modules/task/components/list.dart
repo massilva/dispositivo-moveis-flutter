@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:minhas_financas/modules/category/datasources/shared_preferences_datasource.dart';
 import '../../../components/subtitle_widget.dart';
 import '../../../components/title_widget.dart';
 import '../models/task_model.dart';
@@ -20,7 +21,9 @@ class _ListTasksState extends State<ListTasks> {
   // Instância de controller
   final controller = HomeController(
     taskService: TaskService(
-      categoryService: CategoryService(),
+      categoryService: CategoryService(
+        categoryDatasource: CategorySharedPreferencesDatasource(),
+      ),
     ),
   );
   List<Task> tasks;

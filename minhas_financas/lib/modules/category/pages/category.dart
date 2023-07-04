@@ -18,14 +18,6 @@ class CategoryPage extends StatefulWidget {
 }
 
 class _CategoryPageState extends State<CategoryPage> {
-  List _categories = <Category>[];
-
-  @override
-  void initState() {
-    _categories = widget._controller.getCategories();
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,130 +33,156 @@ class _CategoryPageState extends State<CategoryPage> {
           },
         ),
       ),
-      body: Column(
-        children: [
-          const TitleDefault(title: 'Categorias'),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                children: [
-                  const Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          'Nome',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(right: 16.0, left: 16.0),
-                        child: Text(
-                          'Cor',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      Text(
-                        'Ação',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Container(
-                    color: AppStyle.gray,
-                    height: 1,
-                    margin: const EdgeInsets.symmetric(vertical: 8.0),
-                  ),
-                  Expanded(
-                    child: ListView.builder(
-                      itemCount: _categories.length,
-                      itemBuilder: (_, index) {
-                        return Row(
+      body: FutureBuilder(
+          future: widget._controller.getCategories(),
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return const Center(
+                child: Text(
+                  'Infelizmente, não foi possível carregar a lista de categorias.',
+                  style: TextStyle(color: Colors.red),
+                ),
+              );
+            }
+
+            if (!snapshot.hasData) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+
+            final categories = snapshot.data as List<Category>;
+
+            return Column(
+              children: [
+                const TitleDefault(title: 'Categorias'),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      children: [
+                        const Row(
                           children: [
                             Expanded(
-                              child: Text(_categories[index].name),
-                            ),
-                            Container(
-                              color: Color(_categories[index].color),
-                              height: 16,
-                              width: 16,
-                            ),
-                            Row(
-                              children: [
-                                IconButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pushNamed(
-                                      RoutesGenerator.editCategoryPage,
-                                      arguments: [index, _categories[index]],
-                                    );
-                                  },
-                                  icon: const Icon(Icons.edit),
+                              child: Text(
+                                'Nome',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
                                 ),
-                                IconButton(
-                                  onPressed: () {
-                                    showDialog(
-                                      context: context,
-                                      builder: (context) {
-                                        return AlertDialog(
-                                          title: const Text(
-                                            'Deseja realmente remover ?',
-                                          ),
-                                          content: Text(
-                                              'A categoria: ${_categories[index].name}'),
-                                          actions: [
-                                            ElevatedButton(
-                                              style: const ButtonStyle(
-                                                backgroundColor:
-                                                    MaterialStatePropertyAll(
-                                                  Colors.red,
-                                                ),
-                                              ),
-                                              onPressed: () {
-                                                widget._controller
-                                                    .remove(index);
-                                                Navigator.of(context).pop();
-                                                // Força o rebuild da página
-                                                setState(() {});
-                                              },
-                                              child: const Text(
-                                                'Sim',
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                ),
-                                              ),
-                                            ),
-                                            ElevatedButton(
-                                              onPressed: () {
-                                                Navigator.of(context).pop();
-                                              },
-                                              child: const Text('Não'),
-                                            ),
-                                          ],
-                                        );
-                                      },
-                                    );
-                                  },
-                                  icon: const Icon(Icons.delete),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(right: 16.0, left: 16.0),
+                              child: Text(
+                                'Cor',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
                                 ),
-                              ],
-                            )
+                              ),
+                            ),
+                            Text(
+                              'Ação',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ],
-                        );
-                      },
+                        ),
+                        Container(
+                          color: AppStyle.gray,
+                          height: 1,
+                          margin: const EdgeInsets.symmetric(vertical: 8.0),
+                        ),
+                        Expanded(
+                          child: ListView.builder(
+                            itemCount: categories.length,
+                            itemBuilder: (_, index) {
+                              return Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(categories[index].name),
+                                  ),
+                                  Container(
+                                    color: Color(categories[index].color),
+                                    height: 16,
+                                    width: 16,
+                                  ),
+                                  Row(
+                                    children: [
+                                      IconButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pushNamed(
+                                            RoutesGenerator.editCategoryPage,
+                                            arguments: [
+                                              index,
+                                              categories[index]
+                                            ],
+                                          );
+                                        },
+                                        icon: const Icon(Icons.edit),
+                                      ),
+                                      IconButton(
+                                        onPressed: () {
+                                          showDialog(
+                                            context: context,
+                                            builder: (context) {
+                                              return AlertDialog(
+                                                title: const Text(
+                                                  'Deseja realmente remover ?',
+                                                ),
+                                                content: Text(
+                                                    'A categoria: ${categories[index].name}'),
+                                                actions: [
+                                                  ElevatedButton(
+                                                    style: const ButtonStyle(
+                                                      backgroundColor:
+                                                          MaterialStatePropertyAll(
+                                                        Colors.red,
+                                                      ),
+                                                    ),
+                                                    onPressed: () {
+                                                      widget._controller
+                                                          .remove(index);
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                      // Força o rebuild da página
+                                                      setState(() {});
+                                                    },
+                                                    child: const Text(
+                                                      'Sim',
+                                                      style: TextStyle(
+                                                        color: Colors.white,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  ElevatedButton(
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                    child: const Text('Não'),
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          );
+                                        },
+                                        icon: const Icon(Icons.delete),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              );
+                            },
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
+                ),
+              ],
+            );
+          }),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context).pushNamedAndRemoveUntil(

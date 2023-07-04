@@ -1,22 +1,20 @@
+import 'package:minhas_financas/modules/category/datasources/category_datasource.dart';
+
 import '../models/category_model.dart';
 
 class CategoryService {
-  static final CategoryService _instance = CategoryService._internal();
+  final CategoryDatasource _categoryDatasource;
 
-  factory CategoryService() {
-    return _instance;
-  }
+  CategoryService({required CategoryDatasource categoryDatasource})
+      : _categoryDatasource = categoryDatasource;
 
-  CategoryService._internal();
-
-  final _database = <Category>[];
-  List<Category> getCategories() {
-    return _database;
+  Future<List<Category>> getCategories() async {
+    return await _categoryDatasource.getAll();
   }
 
   String? save(Category category) {
     try {
-      _database.add(category);
+      _categoryDatasource.insert(category);
       return null;
     } catch (error) {
       return error.toString();
@@ -24,10 +22,11 @@ class CategoryService {
   }
 
   void remove(int index) {
-    _database.removeAt(index);
+    _categoryDatasource.deleteById(index);
   }
 
   void updateCategory(int index, Category updatedCategory) {
-    _database[index] = updatedCategory;
+    final copy = updatedCategory.copyWith(id: index);
+    _categoryDatasource.update(copy);
   }
 }

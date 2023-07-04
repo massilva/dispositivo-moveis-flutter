@@ -8,7 +8,8 @@ class CategoryController {
   CategoryController({required CategoryService categoryService})
       : _categoryService = categoryService;
 
-  List<Category> getCategories() => _categoryService.getCategories();
+  Future<List<Category>> getCategories() async =>
+      await _categoryService.getCategories();
 
   String? saveCategory(String name, int color, String? description) {
     return _categoryService.save(
