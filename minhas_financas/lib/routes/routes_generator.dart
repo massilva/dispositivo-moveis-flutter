@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../modules/category/pages/edit_category.dart';
 
 import '../modules/category/controllers/category_controller.dart';
-import '../modules/category/datasources/sqlite_datasorce.dart';
+import '../modules/category/datasources/sqlite_datasource.dart';
 import '../modules/category/models/category_model.dart';
 import '../modules/category/pages/add_category.dart';
 import '../modules/category/services/category_service.dart';
