@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:minhas_financas/modules/category/models/category_model.dart';
 
 import '../../../routes/routes_generator.dart';
 import '../components/add_and_edit_category.dart';
 import '../controllers/category_controller.dart';
+import '../models/category_model.dart';
 
 class CategoryEditPage extends StatelessWidget {
   final _key = GlobalKey<FormState>();

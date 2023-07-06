@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:minhas_financas/shared/styles.dart';
+
+import '../shared/styles.dart';
 
 class InputDefault extends StatelessWidget {
   final String _labelText;

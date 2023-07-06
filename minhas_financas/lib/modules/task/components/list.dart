@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:minhas_financas/modules/category/datasources/shared_preferences_datasource.dart';
+
 import '../../../components/subtitle_widget.dart';
 import '../../../components/title_widget.dart';
-import '../models/task_model.dart';
-import '../../category/services/category_service.dart';
-import '../../../shared/styles.dart';
-
-import '../../home/controllers/home_controller.dart';
-import '../services/task_service.dart';
 import '../../../shared/constants.dart';
+import '../../../shared/styles.dart';
+import '../../category/datasources/shared_preferences_datasource.dart';
+import '../../category/services/category_service.dart';
+import '../../home/controllers/home_controller.dart';
+import '../models/task_model.dart';
+import '../services/task_service.dart';
 
 class ListTasks extends StatefulWidget {
   const ListTasks({super.key});

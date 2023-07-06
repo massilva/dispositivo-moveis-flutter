@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:minhas_financas/modules/category/components/add_and_edit_category.dart';
 
 import '../../../routes/routes_generator.dart';
-import '../controllers/category_controller.dart';
 import '../../../shared/styles.dart';
+import '../components/add_and_edit_category.dart';
+import '../controllers/category_controller.dart';
 
 class CategoryAddPage extends StatelessWidget {
   final TextEditingController _nameEditingController;

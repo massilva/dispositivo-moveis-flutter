@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:minhas_financas/modules/category/pages/edit_category.dart';
+import '../modules/category/pages/edit_category.dart';
 
 import '../modules/category/controllers/category_controller.dart';
-import '../modules/category/datasources/shared_preferences_datasource.dart';
+import '../modules/category/datasources/sqlite_datasorce.dart';
 import '../modules/category/models/category_model.dart';
 import '../modules/category/pages/add_category.dart';
 import '../modules/category/services/category_service.dart';
@@ -25,7 +25,7 @@ class RoutesGenerator {
   RoutesGenerator._();
 
   static Route generate(RouteSettings settings) {
-    final categoryDatasource = CategorySharedPreferencesDatasource();
+    final categoryDatasource = SqliteDatasource();
     final categoryService =
         CategoryService(categoryDatasource: categoryDatasource);
     final categoryController = CategoryController(

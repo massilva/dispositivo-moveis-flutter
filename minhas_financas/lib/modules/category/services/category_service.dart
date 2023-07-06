@@ -1,5 +1,4 @@
-import 'package:minhas_financas/modules/category/datasources/category_datasource.dart';
-
+import '../datasources/category_datasource.dart';
 import '../models/category_model.dart';
 
 class CategoryService {
