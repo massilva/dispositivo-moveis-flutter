@@ -89,3 +89,4 @@ $ git pull origin <branch atual>
 **OBS**: antes deste comando é recomendado que verifique a branch atual (`item 2.1.1`), pois se estiver em uma branch A e executar este comando utilizando a branch B será feito o MERGE da branch B com a A.
 
 #### 2.2. Antes de colocar as informações no servidor, atualize o repositório local (`item 2.1.2`).
+
